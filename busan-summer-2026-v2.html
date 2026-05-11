@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#C97B93">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="釜山2026">
+<meta name="mobile-web-app-capable" content="yes">
+<title>BUSAN in summer 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #C97B93;
+  --pink-mid: #E0A8BA;
+  --pink-light: #F5DDE5;
+  --pink-pale: #FFF0F4;
+  --blue: #6FA3C1;
+  --blue-light: #C2DCEC;
+  --blue-pale: #EBF5FB;
+  --coral: #E8907E;
+  --sage: #9ABFAE;
+  --sage-light: #D4EBE1;
+  --cream: #FDF8F4;
+  --sand: #F5EDE0;
+  --text: #3A2D30;
+  --text-muted: #9A8A8E;
+  --white: #FFFFFF;
+  --radius: 18px;
+  --radius-sm: 10px;
+  /* 底部導覽列高度 + 手機安全區 */
+  --tab-bar-h: calc(64px + env(safe-area-inset-bottom));
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body { height:100%; }
+body {
+  font-family:'Noto Sans TC', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ─── INSTALL BANNER ─── */
+#install-banner {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: linear-gradient(135deg, var(--pink), #E096AD);
+  color: white;
+  padding: 12px 16px;
+  z-index: 9999;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 12px rgba(201,123,147,0.35);
+}
+#install-banner.show { display: flex; }
+#install-banner span { flex: 1; font-size: 13px; font-weight: 500; }
+#install-banner button {
+  background: white;
+  color: var(--pink);
+  border: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Noto Sans TC', sans-serif;
+  flex-shrink: 0;
+}
+#install-close {
+  background: none !important;
+  color: rgba(255,255,255,0.8) !important;
+  padding: 6px 8px !important;
+  font-size: 18px !important;
+}
+
+/* ─── HEADER ─── */
+.app-header {
+  background: linear-gradient(160deg, #F8DDE5 0%, #EAF3F9 60%, #F0EDFA 100%);
+  padding: 44px 24px 0;
+  position: relative;
+  overflow: hidden;
+}
+.header-deco {
+  position: absolute;
+  top: -30px; right: -40px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,123,147,0.12) 0%, transparent 70%);
+}
+.header-deco2 {
+  position: absolute;
+  top: 10px; left: -50px;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(111,163,193,0.12) 0%, transparent 70%);
+}
+.header-inner {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding-bottom: 18px;
+}
+.header-eyebrow {
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 5px;
+  color: var(--pink);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  opacity: 0.85;
+}
+.header-title {
+  font-family:'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 600;
+  color: #4A2535;
+  line-height: 1.05;
+  letter-spacing: 1px;
+}
+.header-title em {
+  color: var(--blue);
+  font-style: italic;
+  font-weight: 300;
+}
+.header-sub {
+  margin-top: 8px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.floating-dots {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.dot {
+  position: absolute;
+  border-radius: 50%;
+  animation: floatUp 8s ease-in-out infinite;
+  opacity: 0.25;
+}
+@keyframes floatUp {
+  0%,100% { transform: translateY(0) scale(1); opacity:0.18; }
+  50% { transform: translateY(-14px) scale(1.1); opacity:0.32; }
+}
+
+/* ─── WAVES ─── */
+.waves-wrap {
+  position: relative;
+  height: 64px;
+  overflow: hidden;
+  line-height: 0;
+}
+.wave-svg {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 200%;
+  height: 64px;
+}
+.wave-svg.w1 { animation: waveSlide 7s linear infinite; opacity: 0.65; }
+.wave-svg.w2 { animation: waveSlide 11s linear infinite reverse; opacity: 0.38; }
+.wave-svg.w3 { animation: waveSlide 15s linear infinite; opacity: 0.22; }
+@keyframes waveSlide {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── 底部 TAB BAR（主要改動） ─── */
+.tab-bar {
+  display: flex;
+  background: var(--white);
+  border-top: 1.5px solid var(--pink-light);
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 100;
+  box-shadow: 0 -4px 20px rgba(201,123,147,0.13);
+  padding-bottom: env(safe-area-inset-bottom); /* iPhone 瀏海支援 */
+}
+.tab-btn {
+  flex: 1;
+  padding: 10px 4px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.22s;
+  position: relative;
+  min-height: 56px;
+}
+.tab-btn.active { color: var(--pink); font-weight: 600; }
+.tab-btn.active .tab-icon-wrap {
+  background: var(--pink-pale);
+  transform: translateY(-2px);
+}
+.tab-icon-wrap {
+  width: 44px; height: 32px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.22s cubic-bezier(.34,1.56,.64,1);
+}
+.tab-icon { font-size: 20px; }
+.tab-label { font-size: 10px; letter-spacing: 0.3px; }
+
+/* ─── CONTENT 主體區域 ─── */
+.content-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Tab Panels 並排，用 JS 滑動 */
+.panels-track {
+  display: flex;
+  width: 300%; /* 3 個 panel */
+  transition: transform 0.38s cubic-bezier(.4,0,.2,1);
+}
+.tab-panel {
+  width: calc(100% / 3);
+  flex-shrink: 0;
+  padding: 20px 16px calc(var(--tab-bar-h) + 16px);
+  min-height: 60vh;
+}
+
+/* ─── SECTION HEADER ─── */
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #4A2535;
+}
+.btn-add {
+  background: var(--pink);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-family: 'Noto Sans TC', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+.btn-add:active { transform: scale(0.96); }
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 18px rgba(201,123,147,0.1);
+  border: 1px solid rgba(201,123,147,0.12);
+  position: relative;
+  overflow: hidden;
+}
+.card-accent {
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  border-radius: 18px 0 0 18px;
+}
+
+/* ─── ITINERARY ─── */
+.itin-day-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--pink);
+  padding-left: 2px;
+}
+.itin-card { padding-left: 20px; }
+.itin-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+.itin-time {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--pink);
+  background: var(--pink-pale);
+  padding: 2px 9px;
+  border-radius: 20px;
+  margin-bottom: 7px;
+  font-weight: 500;
+}
+.itin-address {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.itin-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.itin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 11px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.link-map { background: var(--blue-pale); color: var(--blue); }
+.link-navi { background: var(--sage-light); color: #5E9980; }
+.link-map:active, .link-navi:active { opacity: 0.7; }
+.transport-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px;
+  background: var(--sand);
+  color: #8A6A50;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-top: 4px;
+}
+.itin-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+.btn-small {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-family: 'Noto Sans TC', sans-serif;
+  cursor: pointer;
+  border: 1.5px solid;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.btn-edit { border-color: var(--blue-light); color: var(--blue); background: var(--blue-pale); }
+.btn-delete { border-color: var(--pink-light); color: var(--coral); background: #FFF5F5; }
+.btn-small:active { transform: scale(0.95); }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+.empty-icon { font-size: 52px; margin-bottom: 14px; opacity: 0.5; }
+.empty-text { font-size: 14px; line-height: 1.8; }
+
+/* ─── SHOPPING ─── */
+.shop-progress {
+  background: var(--pink-pale);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.progress-bar-wrap {
+  flex: 1;
+  height: 6px;
+  background: var(--pink-light);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink-mid), var(--coral));
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+.progress-text { font-size: 12px; color: var(--pink); font-weight: 700; white-space: nowrap; }
+.shop-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 13px 16px;
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  box-shadow: 0 1px 10px rgba(201,123,147,0.08);
+  border: 1px solid rgba(201,123,147,0.1);
+  transition: all 0.2s;
+}
+.shop-item.checked { opacity: 0.5; }
+.shop-check {
+  width: 22px; height: 22px;
+  border: 2px solid var(--pink-mid);
+  border-radius: 6px;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  margin-top: 1px;
+}
+.shop-check.on { background: var(--pink); border-color: var(--pink); }
+.shop-check.on::after { content: '✓'; color: white; font-size: 13px; }
+.shop-info { flex: 1; }
+.shop-name { font-size: 14px; font-weight: 500; color: var(--text); }
+.shop-qty { font-size: 11px; color: var(--blue); background: var(--blue-pale); padding: 1px 8px; border-radius: 10px; display: inline-block; margin: 4px 0; }
+.shop-note { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.shop-del { background: none; border: none; color: var(--pink-mid); cursor: pointer; font-size: 18px; padding: 2px; line-height: 1; }
+.shop-del:active { color: var(--coral); }
+
+/* ─── TOOLS ─── */
+.tool-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 18px rgba(201,123,147,0.08);
+  border: 1px solid rgba(201,123,147,0.1);
+}
+.tool-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #4A2535;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.tool-icon { font-size: 18px; }
+.tool-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.tool-btn:active { transform: scale(0.97); }
+.btn-translate { background: linear-gradient(135deg, #4285F4, #34A853); color: white; }
+.btn-naver { background: linear-gradient(135deg, #03C75A, #00B451); color: white; }
+.tool-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
+.tool-label { font-size: 12px; color: var(--text-muted); width: 60px; flex-shrink: 0; }
+.tool-input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1.5px solid var(--pink-light);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: 'Noto Sans TC', sans-serif;
+  color: var(--text);
+  outline: none;
+  transition: border 0.2s;
+  background: var(--cream);
+}
+.tool-input:focus { border-color: var(--pink); }
+.tool-result {
+  margin-top: 10px;
+  padding: 12px 14px;
+  background: var(--pink-pale);
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--pink);
+  text-align: center;
+}
+.rate-note { font-size: 10px; color: var(--text-muted); margin-top: 5px; text-align: center; }
+.aa-people-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.aa-people-row input[type=range] {
+  flex: 1;
+  accent-color: var(--pink);
+}
+.aa-people-val {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--pink);
+  min-width: 26px;
+  text-align: center;
+}
+.weather-links { display: flex; gap: 8px; }
+.weather-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.weather-link:active { transform: scale(0.96); }
+.wl-a { background: var(--blue-pale); color: var(--blue); border: 1.5px solid var(--blue-light); }
+.wl-b { background: var(--sage-light); color: #5E9980; border: 1.5px solid rgba(154,191,174,0.4); }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(60,30,38,0.45);
+  z-index: 200;
+  align-items: flex-end;
+  justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--white);
+  border-radius: 24px 24px 0 0;
+  padding: 24px 20px calc(36px + env(safe-area-inset-bottom));
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s cubic-bezier(.22,.88,.36,1);
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+.modal-handle {
+  width: 36px; height: 4px;
+  background: var(--pink-light);
+  border-radius: 2px;
+  margin: 0 auto 20px;
+}
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #4A2535;
+  margin-bottom: 18px;
+}
+.form-group { margin-bottom: 14px; }
+.form-label { font-size: 12px; color: var(--text-muted); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 5px; display: block; }
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--pink-light);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: 'Noto Sans TC', sans-serif;
+  color: var(--text);
+  outline: none;
+  transition: border 0.2s;
+  background: var(--cream);
+}
+.form-input:focus { border-color: var(--pink); }
+.form-row { display: flex; gap: 10px; }
+.form-row .form-group { flex: 1; }
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--pink), #E096AD);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+}
+.btn-submit:active { transform: scale(0.98); opacity: 0.9; }
+.btn-cancel {
+  width: 100%;
+  padding: 12px;
+  background: none;
+  color: var(--text-muted);
+  border: 1.5px solid var(--pink-light);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: 'Noto Sans TC', sans-serif;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s;
+}
+
+/* ─── FLOATING PETALS ─── */
+.petal {
+  position: fixed;
+  pointer-events: none;
+  font-size: 14px;
+  opacity: 0;
+  animation: petalFall 10s ease-in infinite;
+  z-index: 9999;
+}
+@keyframes petalFall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* select input */
+select.form-input { -webkit-appearance: none; appearance: none; }
+
+/* color label dot */
+.color-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+/* ─── 滑動手勢輔助提示 ─── */
+.swipe-hint {
+  text-align: center;
+  font-size: 10px;
+  color: var(--text-muted);
+  padding: 6px 0 0;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+</style>
+</head>
+<body>
+
+<!-- 安裝到主畫面提示橫幅 -->
+<div id="install-banner">
+  <span>📱 加到主畫面，像 App 一樣使用！</span>
+  <button id="install-btn">安裝</button>
+  <button id="install-close">×</button>
+</div>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="header-deco"></div>
+  <div class="header-deco2"></div>
+  <div class="floating-dots">
+    <div class="dot" style="width:8px;height:8px;background:#F5AABF;top:15%;left:10%;animation-delay:0s;animation-duration:7s;"></div>
+    <div class="dot" style="width:5px;height:5px;background:#A8CBE0;top:40%;left:85%;animation-delay:2s;animation-duration:9s;"></div>
+    <div class="dot" style="width:6px;height:6px;background:#F5AABF;top:65%;left:20%;animation-delay:4s;animation-duration:8s;"></div>
+    <div class="dot" style="width:4px;height:4px;background:#9ABFAE;top:25%;left:60%;animation-delay:1s;animation-duration:11s;"></div>
+    <div class="dot" style="width:7px;height:7px;background:#A8CBE0;top:55%;left:45%;animation-delay:3s;animation-duration:6s;"></div>
+  </div>
+  <div class="header-inner">
+    <p class="header-eyebrow">✦ travel diary ✦</p>
+    <h1 class="header-title">BUSAN <em>in</em><br>summer 2026</h1>
+    <p class="header-sub">釜山夏日旅遊手冊</p>
+  </div>
+</header>
+
+<!-- WAVES -->
+<div class="waves-wrap">
+  <svg class="wave-svg w1" viewBox="0 0 1200 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,32 C150,60 350,4 600,32 C850,60 1050,4 1200,32 L1200,64 L0,64 Z" fill="#FDF8F4"/>
+    <path d="M1200,32 C1050,60 850,4 600,32 C350,60 150,4 0,32 L0,64 L1200,64 Z" fill="#FDF8F4"/>
+  </svg>
+  <svg class="wave-svg w2" viewBox="0 0 1200 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,28 C200,50 400,8 600,28 C800,48 1000,10 1200,28 L1200,64 L0,64 Z" fill="rgba(197,220,240,0.4)"/>
+    <path d="M1200,28 C1000,50 800,8 600,28 C400,48 200,10 0,28 L0,64 L1200,64 Z" fill="rgba(197,220,240,0.4)"/>
+  </svg>
+  <svg class="wave-svg w3" viewBox="0 0 1200 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,36 C100,55 300,16 600,36 C900,56 1100,16 1200,36 L1200,64 L0,64 Z" fill="rgba(245,221,229,0.3)"/>
+    <path d="M1200,36 C1100,55 900,16 600,36 C300,56 100,16 0,36 L0,64 L1200,64 Z" fill="rgba(245,221,229,0.3)"/>
+  </svg>
+</div>
+
+<p class="swipe-hint">← 左右滑動切換分頁 →</p>
+
+<!-- 主體：三個 Panel 並排，用滑動切換 -->
+<div class="content-wrap">
+  <div class="panels-track" id="panels-track">
+
+    <!-- ══════════════════════ 行程 TAB ══════════════════════ -->
+    <section id="tab-itinerary" class="tab-panel">
+      <div class="section-head">
+        <span class="section-title">旅遊行程</span>
+        <button class="btn-add" onclick="openItinModal()">＋ 新增行程</button>
+      </div>
+      <div id="itin-list"></div>
+      <div id="itin-empty" class="empty-state">
+        <div class="empty-icon">🌊</div>
+        <p class="empty-text">還沒有行程<br>點擊「新增行程」開始規劃<br>你的釜山之旅吧！</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════ 購物 TAB ══════════════════════ -->
+    <section id="tab-shopping" class="tab-panel">
+      <div class="section-head">
+        <span class="section-title">購物清單</span>
+        <button class="btn-add" onclick="openShopModal()">＋ 新增商品</button>
+      </div>
+      <div class="shop-progress" id="shop-progress-wrap">
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+        </div>
+        <span class="progress-text" id="progress-text">0 / 0</span>
+      </div>
+      <div id="shop-list"></div>
+      <div id="shop-empty" class="empty-state">
+        <div class="empty-icon">🛍️</div>
+        <p class="empty-text">購物清單是空的<br>想買什麼先記下來！</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════ 工具 TAB ══════════════════════ -->
+    <section id="tab-tools" class="tab-panel">
+      <div class="section-head">
+        <span class="section-title">實用工具</span>
+      </div>
+
+      <!-- 翻譯 -->
+      <div class="tool-card">
+        <div class="tool-title"><span class="tool-icon">🌐</span>即時翻譯</div>
+        <div style="display:flex;gap:8px;">
+          <a href="https://translate.google.com/?sl=ko&tl=zh-TW&op=translate" target="_blank" class="tool-btn btn-translate" style="flex:1;">
+            🈯 Google 翻譯（韓→中）
+          </a>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px;">
+          <a href="https://papago.naver.com/" target="_blank" class="tool-btn btn-naver" style="flex:1;">
+            🟢 Papago 翻譯
+          </a>
+        </div>
+      </div>
+
+      <!-- 匯率 -->
+      <div class="tool-card">
+        <div class="tool-title"><span class="tool-icon">💱</span>匯率換算</div>
+        <div class="tool-row">
+          <span class="tool-label">目前匯率</span>
+          <span style="font-size:11px;color:var(--text-muted);">1 TWD = </span>
+          <input type="number" class="tool-input" id="rate-input" value="42" style="width:80px;flex:unset;" oninput="calcCurrency()">
+          <span style="font-size:11px;color:var(--text-muted);"> KRW</span>
+        </div>
+        <div class="tool-row">
+          <span class="tool-label" style="color:var(--blue);">台幣 TWD</span>
+          <input type="number" class="tool-input" id="twd-input" placeholder="輸入金額" oninput="fromTWD()">
+        </div>
+        <div class="tool-row">
+          <span class="tool-label" style="color:var(--coral);">韓幣 KRW</span>
+          <input type="number" class="tool-input" id="krw-input" placeholder="輸入金額" oninput="fromKRW()">
+        </div>
+        <div class="tool-result" id="currency-result">在上方輸入金額</div>
+        <p class="rate-note">⚠️ 請自行更新今日匯率（可查詢銀行牌告）</p>
+      </div>
+
+      <!-- 旅遊記帳 -->
+      <div class="tool-card">
+        <div class="tool-title"><span class="tool-icon">📒</span>旅遊記帳</div>
+        <div style="display:flex;gap:8px;margin-bottom:8px;">
+          <input type="text" class="tool-input" id="exp-name" placeholder="項目（例：海鮮午餐）" style="flex:2;">
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:6px;align-items:center;">
+          <input type="number" class="tool-input" id="exp-amount" placeholder="金額" style="flex:2;" oninput="previewExpRate()">
+          <select class="tool-input" id="exp-currency" style="flex:1;min-width:72px;" onchange="previewExpRate()">
+            <option value="KRW">₩ 韓圓</option>
+            <option value="TWD">$ 台幣</option>
+          </select>
+        </div>
+        <div id="exp-preview" style="font-size:12px;color:var(--text-muted);margin-bottom:8px;min-height:16px;text-align:right;padding-right:2px;"></div>
+        <button class="btn-submit" style="margin-top:0;padding:11px;" onclick="addExpense()">＋ 加入記帳</button>
+        <div id="exp-list" style="margin-top:14px;"></div>
+        <p style="font-size:10px;color:var(--text-muted);margin-top:4px;text-align:center;">換算匯率同「匯率換算」的設定（預設 1 TWD = 42 KRW）</p>
+        <div id="exp-total-box" style="display:none;margin-top:12px;border-top:1.5px dashed var(--pink-light);padding-top:12px;">
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-bottom:4px;">
+            <span>韓圓支出小計</span><span id="exp-krw-sub">₩0</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-bottom:10px;">
+            <span>台幣支出小計</span><span id="exp-twd-sub">$0</span>
+          </div>
+          <div class="tool-result" style="font-size:18px;">💰 總計 <span id="exp-total-twd">$0</span> TWD</div>
+        </div>
+      </div>
+
+      <!-- AA 分帳 -->
+      <div class="tool-card">
+        <div class="tool-title"><span class="tool-icon">🧾</span>AA 分帳計算</div>
+        <div class="tool-row">
+          <span class="tool-label">總金額</span>
+          <input type="number" class="tool-input" id="aa-total" placeholder="輸入總金額" oninput="calcAA()">
+          <select class="tool-input" id="aa-currency" style="flex:unset;width:80px;" onchange="calcAA()">
+            <option value="KRW">₩ KRW</option>
+            <option value="TWD">$ TWD</option>
+          </select>
+        </div>
+        <div class="aa-people-row">
+          <span class="tool-label">人數</span>
+          <input type="range" min="2" max="10" value="3" id="aa-people" oninput="document.getElementById('aa-ppl-val').textContent=this.value;calcAA()">
+          <span class="aa-people-val" id="aa-ppl-val">3</span>
+          <span style="font-size:12px;color:var(--text-muted);">人</span>
+        </div>
+        <div class="tool-result" id="aa-result">輸入金額後顯示</div>
+      </div>
+
+      <!-- 天氣 -->
+      <div class="tool-card">
+        <div class="tool-title"><span class="tool-icon">🌤️</span>釜山天氣查詢</div>
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">夏季釜山平均氣溫 26–33°C，7–8 月為雨季，請備好雨具☂️</p>
+        <div class="weather-links">
+          <a href="https://weather.com/zh-TW/weather/today/l/35.1796,129.0756" target="_blank" class="weather-link wl-a">
+            ⛅ Weather.com
+          </a>
+          <a href="https://www.windy.com/?35.1796,129.0756,10" target="_blank" class="weather-link wl-b">
+            💨 Windy 風速
+          </a>
+        </div>
+        <a href="https://forecast.weather.gov/" target="_blank" class="weather-link wl-a" style="margin-top:8px;display:flex;">
+          🌊 海浪 / 紫外線查詢
+        </a>
+      </div>
+
+      <!-- 實用連結 -->
+      <div class="tool-card">
+        <div class="tool-title"><span class="tool-icon">🔗</span>釜山實用連結</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="https://www.lottedfs.com/kor/dfs/main/main" target="_blank" class="tool-btn" style="background:var(--pink-pale);color:var(--pink);border:1.5px solid var(--pink-light);font-size:13px;padding:11px;">🏬 樂天免稅店</a>
+          <a href="https://www.shilladfs.com/" target="_blank" class="tool-btn" style="background:var(--blue-pale);color:var(--blue);border:1.5px solid var(--blue-light);font-size:13px;padding:11px;">💎 新羅免稅店</a>
+          <a href="https://www.korail.com/site/main/home" target="_blank" class="tool-btn" style="background:var(--sage-light);color:#5E9980;border:1.5px solid rgba(154,191,174,0.4);font-size:13px;padding:11px;">🚄 KTX 火車訂票</a>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /panels-track -->
+</div><!-- /content-wrap -->
+
+<!-- ══════ 底部 TAB BAR（改為固定在底部）══════ -->
+<nav class="tab-bar">
+  <button class="tab-btn active" id="tab-btn-0" onclick="switchTab(0)">
+    <div class="tab-icon-wrap"><span class="tab-icon">🗺️</span></div>
+    <span class="tab-label">行程</span>
+  </button>
+  <button class="tab-btn" id="tab-btn-1" onclick="switchTab(1)">
+    <div class="tab-icon-wrap"><span class="tab-icon">🛍️</span></div>
+    <span class="tab-label">購物</span>
+  </button>
+  <button class="tab-btn" id="tab-btn-2" onclick="switchTab(2)">
+    <div class="tab-icon-wrap"><span class="tab-icon">🧰</span></div>
+    <span class="tab-label">工具</span>
+  </button>
+</nav>
+
+<!-- ══════════════════════ 行程 MODAL ══════════════════════ -->
+<div class="modal-overlay" id="itin-modal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="itin-modal-title">✦ 新增行程</div>
+    <input type="hidden" id="itin-edit-id">
+    <div class="form-group">
+      <label class="form-label">景點名稱 *</label>
+      <input type="text" class="form-input" id="itin-name" placeholder="例：海雲台海水浴場">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">日期 *</label>
+        <input type="date" class="form-input" id="itin-date">
+      </div>
+      <div class="form-group">
+        <label class="form-label">時間</label>
+        <input type="time" class="form-input" id="itin-time">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">地址（韓文最佳）</label>
+      <input type="text" class="form-input" id="itin-addr" placeholder="例：釜山廣域市海雲台區中洞">
+    </div>
+    <div class="form-group">
+      <label class="form-label">交通方式</label>
+      <select class="form-input" id="itin-transport">
+        <option value="">選擇交通方式</option>
+        <option value="🚇 地鐵">🚇 地鐵</option>
+        <option value="🚌 公車">🚌 公車</option>
+        <option value="🚕 計程車">🚕 計程車</option>
+        <option value="🚶 步行">🚶 步行</option>
+        <option value="🚗 租車">🚗 租車</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">顏色標籤</label>
+      <select class="form-input" id="itin-color">
+        <option value="#C97B93">🌸 玫瑰粉</option>
+        <option value="#6FA3C1">🌊 海洋藍</option>
+        <option value="#9ABFAE">🌿 清新綠</option>
+        <option value="#E8907E">🍑 珊瑚橘</option>
+        <option value="#B8A9D0">💜 薰衣草</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">備註</label>
+      <input type="text" class="form-input" id="itin-note" placeholder="門票、注意事項…">
+    </div>
+    <button class="btn-submit" onclick="saveItin()">儲存行程</button>
+    <button class="btn-cancel" onclick="closeItinModal()">取消</button>
+  </div>
+</div>
+
+<!-- ══════════════════════ 購物 MODAL ══════════════════════ -->
+<div class="modal-overlay" id="shop-modal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">🛍️ 新增商品</div>
+    <div class="form-group">
+      <label class="form-label">商品名稱 *</label>
+      <input type="text" class="form-input" id="shop-name-input" placeholder="例：韓國面膜">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">數量</label>
+        <input type="text" class="form-input" id="shop-qty-input" placeholder="例：3 盒">
+      </div>
+      <div class="form-group">
+        <label class="form-label">預算</label>
+        <input type="text" class="form-input" id="shop-price-input" placeholder="例：₩15,000">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">備註</label>
+      <input type="text" class="form-input" id="shop-note-input" placeholder="牌子、顏色、注意事項…">
+    </div>
+    <div class="form-group">
+      <label class="form-label">參考圖片（選填）</label>
+      <label id="img-upload-label" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1.5px dashed var(--pink-mid);border-radius:var(--radius-sm);padding:16px;cursor:pointer;background:var(--pink-pale);transition:all 0.2s;">
+        <span style="font-size:28px;">📷</span>
+        <span style="font-size:12px;color:var(--text-muted);">點擊上傳圖片</span>
+        <input type="file" id="shop-img-input" accept="image/*" style="display:none;" onchange="previewShopImg(this)">
+      </label>
+      <div id="shop-img-preview" style="margin-top:8px;display:none;position:relative;">
+        <img id="shop-img-thumb" style="width:100%;border-radius:var(--radius-sm);max-height:160px;object-fit:cover;" src="">
+        <button onclick="clearShopImg()" style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.5);color:white;border:none;border-radius:50%;width:24px;height:24px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>
+      </div>
+    </div>
+    <button class="btn-submit" onclick="saveShop()">加入清單</button>
+    <button class="btn-cancel" onclick="closeShopModal()">取消</button>
+  </div>
+</div>
+
+<script>
+// ══════ DATA ══════
+var itins = JSON.parse(localStorage.getItem('busan_itins') || '[]');
+var shops = JSON.parse(localStorage.getItem('busan_shops') || '[]');
+function saveData() {
+  localStorage.setItem('busan_itins', JSON.stringify(itins));
+  localStorage.setItem('busan_shops', JSON.stringify(shops));
+}
+
+// ══════ TAB 切換（滑軌式動畫）══════
+var currentTab = 0;
+var tabBtns = [
+  document.getElementById('tab-btn-0'),
+  document.getElementById('tab-btn-1'),
+  document.getElementById('tab-btn-2')
+];
+var track = document.getElementById('panels-track');
+
+function switchTab(idx) {
+  currentTab = idx;
+  // 移動滑軌
+  track.style.transform = 'translateX(-' + (idx * 100 / 3) + '%)';
+  // 更新按鈕狀態
+  tabBtns.forEach(function(b, i) {
+    b.classList.toggle('active', i === idx);
+  });
+  // 回到頂部
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ══════ 左右滑動手勢 ══════
+(function() {
+  var startX = 0, startY = 0, isSwipe = false;
+  var ct = document.querySelector('.content-wrap');
+  ct.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isSwipe = false;
+  }, { passive: true });
+  ct.addEventListener('touchmove', function(e) {
+    var dx = e.touches[0].clientX - startX;
+    var dy = e.touches[0].clientY - startY;
+    if (!isSwipe && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+      isSwipe = true;
+    }
+  }, { passive: true });
+  ct.addEventListener('touchend', function(e) {
+    if (!isSwipe) return;
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) < 50) return; // 滑動距離太短忽略
+    if (dx < 0 && currentTab < 2) switchTab(currentTab + 1); // 向左滑 → 下一頁
+    if (dx > 0 && currentTab > 0) switchTab(currentTab - 1); // 向右滑 → 上一頁
+  });
+})();
+
+// ══════ PWA 安裝提示 ══════
+var deferredInstallPrompt = null;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  // 只在還沒安裝過的情況下顯示
+  if (!localStorage.getItem('busan_installed')) {
+    document.getElementById('install-banner').classList.add('show');
+  }
+});
+document.getElementById('install-btn').onclick = function() {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  deferredInstallPrompt.userChoice.then(function(result) {
+    if (result.outcome === 'accepted') {
+      localStorage.setItem('busan_installed', '1');
+    }
+    document.getElementById('install-banner').classList.remove('show');
+    deferredInstallPrompt = null;
+  });
+};
+document.getElementById('install-close').onclick = function() {
+  document.getElementById('install-banner').classList.remove('show');
+};
+
+// ══════ ITINERARY ══════
+function openItinModal(editId, prefillDate) {
+  document.getElementById('itin-edit-id').value = editId || '';
+  if (editId) {
+    var i = itins.find(x => x.id == editId);
+    document.getElementById('itin-modal-title').textContent = '✦ 編輯行程';
+    document.getElementById('itin-name').value = i.name || '';
+    document.getElementById('itin-date').value = i.date || '';
+    document.getElementById('itin-time').value = i.time || '';
+    document.getElementById('itin-addr').value = i.addr || '';
+    document.getElementById('itin-transport').value = i.transport || '';
+    document.getElementById('itin-color').value = i.color || '#C97B93';
+    document.getElementById('itin-note').value = i.note || '';
+  } else {
+    document.getElementById('itin-modal-title').textContent = '✦ 新增行程';
+    ['itin-name','itin-time','itin-addr','itin-note'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('itin-date').value = prefillDate || '';
+    document.getElementById('itin-transport').value = '';
+    document.getElementById('itin-color').value = '#C97B93';
+  }
+  document.getElementById('itin-modal').classList.add('open');
+}
+function closeItinModal() {
+  document.getElementById('itin-modal').classList.remove('open');
+}
+function saveItin() {
+  var name = document.getElementById('itin-name').value.trim();
+  if (!name) { alert('請輸入景點名稱'); return; }
+  var editId = document.getElementById('itin-edit-id').value;
+  var obj = {
+    id: editId || Date.now(),
+    name: name,
+    date: document.getElementById('itin-date').value,
+    time: document.getElementById('itin-time').value,
+    addr: document.getElementById('itin-addr').value.trim(),
+    transport: document.getElementById('itin-transport').value,
+    color: document.getElementById('itin-color').value,
+    note: document.getElementById('itin-note').value.trim()
+  };
+  if (editId) {
+    var idx = itins.findIndex(x => x.id == editId);
+    itins[idx] = obj;
+  } else {
+    itins.push(obj);
+  }
+  saveData(); renderItins(); closeItinModal();
+}
+function deleteItin(id) {
+  if (!confirm('確定刪除這個行程？')) return;
+  itins = itins.filter(x => x.id != id);
+  saveData(); renderItins();
+}
+function renderItins() {
+  var list = document.getElementById('itin-list');
+  var empty = document.getElementById('itin-empty');
+  if (itins.length === 0) { list.innerHTML = ''; empty.style.display = ''; return; }
+  empty.style.display = 'none';
+  var sorted = [...itins].sort((a,b) => {
+    if (a.date < b.date) return -1;
+    if (a.date > b.date) return 1;
+    return (a.time || '') < (b.time || '') ? -1 : 1;
+  });
+  var days = {};
+  sorted.forEach(i => {
+    var d = i.date || '未指定日期';
+    if (!days[d]) days[d] = [];
+    days[d].push(i);
+  });
+  var html = '';
+  Object.keys(days).forEach(day => {
+    var label = day === '未指定日期' ? '📌 未指定日期' : '📅 ' + formatDate(day);
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;margin-top:18px;">';
+    html += '<span class="itin-day-label" style="margin:0;">' + label + '</span>';
+    html += '<button onclick="openItinModal(null,\'' + day + '\')" style="background:var(--pink-pale);color:var(--pink);border:1.5px solid var(--pink-light);border-radius:50px;padding:5px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;">＋ 新增</button>';
+    html += '</div>';
+    days[day].forEach(i => {
+      var mapsQ = encodeURIComponent(i.addr || i.name);
+      html += '<div class="card itin-card">';
+      html += '<div class="card-accent" style="background:' + i.color + ';"></div>';
+      if (i.time) html += '<span class="itin-time">⏰ ' + i.time + '</span>';
+      html += '<div class="itin-name">' + esc(i.name) + '</div>';
+      if (i.addr) html += '<div class="itin-address">📍 ' + esc(i.addr) + '</div>';
+      html += '<div class="itin-links">';
+      if (i.addr || i.name) {
+        html += '<a href="https://maps.google.com/?q=' + mapsQ + '" target="_blank" class="itin-link link-map">🗺️ Google Maps</a>';
+        html += '<a href="https://map.naver.com/v5/search/' + mapsQ + '" target="_blank" class="itin-link link-navi">🧭 Naver 導航</a>';
+      }
+      html += '</div>';
+      if (i.transport) html += '<span class="transport-badge">' + esc(i.transport) + '</span>';
+      if (i.note) html += '<div style="font-size:12px;color:var(--text-muted);margin-top:8px;">💬 ' + esc(i.note) + '</div>';
+      html += '<div class="itin-actions">';
+      html += '<button class="btn-small btn-edit" onclick="openItinModal(' + i.id + ')">✏️ 編輯</button>';
+      html += '<button class="btn-small btn-delete" onclick="deleteItin(' + i.id + ')">🗑️ 刪除</button>';
+      html += '</div></div>';
+    });
+  });
+  list.innerHTML = html;
+}
+function formatDate(d) {
+  if (!d) return '';
+  var parts = d.split('-');
+  var dt = new Date(d + 'T00:00:00');
+  var days = ['日','一','二','三','四','五','六'];
+  return parts[0] + '年' + parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日（' + days[dt.getDay()] + '）';
+}
+function esc(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ══════ SHOPPING ══════
+function openShopModal() {
+  ['shop-name-input','shop-qty-input','shop-price-input','shop-note-input'].forEach(id => document.getElementById(id).value = '');
+  clearShopImg();
+  document.getElementById('shop-modal').classList.add('open');
+}
+function previewShopImg(input) {
+  if (!input.files || !input.files[0]) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('shop-img-thumb').src = e.target.result;
+    document.getElementById('shop-img-preview').style.display = '';
+    document.getElementById('img-upload-label').style.display = 'none';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function clearShopImg() {
+  document.getElementById('shop-img-thumb').src = '';
+  document.getElementById('shop-img-preview').style.display = 'none';
+  document.getElementById('img-upload-label').style.display = 'flex';
+  var inp = document.getElementById('shop-img-input');
+  if (inp) inp.value = '';
+}
+function closeShopModal() { document.getElementById('shop-modal').classList.remove('open'); }
+function saveShop() {
+  var name = document.getElementById('shop-name-input').value.trim();
+  if (!name) { alert('請輸入商品名稱'); return; }
+  var imgSrc = document.getElementById('shop-img-thumb').src || '';
+  if (imgSrc && imgSrc.indexOf('data:image') !== 0) imgSrc = '';
+  shops.push({
+    id: Date.now(),
+    name: name,
+    qty: document.getElementById('shop-qty-input').value.trim(),
+    price: document.getElementById('shop-price-input').value.trim(),
+    note: document.getElementById('shop-note-input').value.trim(),
+    img: imgSrc,
+    done: false
+  });
+  saveData(); renderShops(); closeShopModal();
+}
+function toggleShop(id) {
+  var s = shops.find(x => x.id == id);
+  if (s) { s.done = !s.done; saveData(); renderShops(); }
+}
+function deleteShop(id) {
+  shops = shops.filter(x => x.id != id);
+  saveData(); renderShops();
+}
+function renderShops() {
+  var list = document.getElementById('shop-list');
+  var empty = document.getElementById('shop-empty');
+  var done = shops.filter(s => s.done).length;
+  var total = shops.length;
+  var pct = total > 0 ? Math.round(done/total*100) : 0;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = done + ' / ' + total + ' (' + pct + '%)';
+  document.getElementById('shop-progress-wrap').style.display = total > 0 ? '' : 'none';
+  if (total === 0) { list.innerHTML = ''; empty.style.display = ''; return; }
+  empty.style.display = 'none';
+  var html = '';
+  shops.forEach(s => {
+    html += '<div class="shop-item ' + (s.done ? 'checked' : '') + '" style="flex-direction:column;align-items:stretch;">';
+    html += '<div style="display:flex;align-items:flex-start;gap:12px;">';
+    html += '<div class="shop-check ' + (s.done ? 'on' : '') + '" onclick="toggleShop(' + s.id + ')" style="margin-top:2px;flex-shrink:0;"></div>';
+    html += '<div class="shop-info" style="flex:1;">';
+    html += '<div class="shop-name" style="text-decoration:' + (s.done ? 'line-through' : 'none') + '">' + esc(s.name) + '</div>';
+    if (s.qty) html += '<span class="shop-qty">× ' + esc(s.qty) + '</span>';
+    if (s.price) html += '<span class="shop-qty" style="background:var(--pink-pale);color:var(--pink);margin-left:4px;">' + esc(s.price) + '</span>';
+    if (s.note) html += '<div class="shop-note">💬 ' + esc(s.note) + '</div>';
+    html += '</div>';
+    html += '<button class="shop-del" onclick="deleteShop(' + s.id + ')">×</button>';
+    html += '</div>';
+    if (s.img) html += '<img src="' + s.img + '" style="width:100%;border-radius:10px;margin-top:10px;max-height:160px;object-fit:cover;opacity:' + (s.done ? '0.4' : '1') + ';">';
+    html += '</div>';
+  });
+  list.innerHTML = html;
+}
+
+// ══════ CURRENCY ══════
+function getRate() { return parseFloat(document.getElementById('rate-input').value) || 42; }
+function fromTWD() {
+  var v = parseFloat(document.getElementById('twd-input').value);
+  if (isNaN(v)) { document.getElementById('currency-result').textContent = '請輸入金額'; return; }
+  var krw = Math.round(v * getRate());
+  document.getElementById('krw-input').value = krw;
+  document.getElementById('currency-result').textContent = v.toLocaleString() + ' TWD ＝ ₩' + krw.toLocaleString();
+}
+function fromKRW() {
+  var v = parseFloat(document.getElementById('krw-input').value);
+  if (isNaN(v)) { document.getElementById('currency-result').textContent = '請輸入金額'; return; }
+  var twd = (v / getRate()).toFixed(1);
+  document.getElementById('twd-input').value = twd;
+  document.getElementById('currency-result').textContent = '₩' + v.toLocaleString() + ' ＝ ' + parseFloat(twd).toLocaleString() + ' TWD';
+}
+function calcCurrency() { fromTWD(); }
+
+// ══════ AA 分帳 ══════
+function calcAA() {
+  var total = parseFloat(document.getElementById('aa-total').value);
+  var people = parseInt(document.getElementById('aa-people').value) || 3;
+  var cur = document.getElementById('aa-currency').value;
+  var el = document.getElementById('aa-result');
+  if (isNaN(total) || total <= 0) { el.textContent = '輸入金額後顯示'; return; }
+  var each = total / people;
+  var rate = getRate();
+  if (cur === 'KRW') {
+    var eachTWD = (each / rate).toFixed(1);
+    el.textContent = '每人 ₩' + Math.round(each).toLocaleString() + '  ≈ $' + eachTWD + ' TWD';
+  } else {
+    var eachKRW = Math.round(each * rate);
+    el.textContent = '每人 $' + each.toFixed(1) + ' TWD  ≈ ₩' + eachKRW.toLocaleString();
+  }
+}
+
+// ══════ EXPENSE TRACKER ══════
+var expenses = JSON.parse(localStorage.getItem('busan_expenses') || '[]');
+function saveExpenses() { localStorage.setItem('busan_expenses', JSON.stringify(expenses)); }
+function previewExpRate() {
+  var amt = parseFloat(document.getElementById('exp-amount').value);
+  var cur = document.getElementById('exp-currency').value;
+  var el = document.getElementById('exp-preview');
+  if (!amt || isNaN(amt)) { el.textContent = ''; return; }
+  var rate = parseFloat(document.getElementById('rate-input').value) || 42;
+  if (cur === 'KRW') { el.textContent = '≈ ' + (amt / rate).toFixed(1) + ' TWD'; }
+  else { el.textContent = '≈ ₩' + Math.round(amt * rate).toLocaleString() + ' KRW'; }
+}
+function addExpense() {
+  var name = document.getElementById('exp-name').value.trim();
+  var amt = parseFloat(document.getElementById('exp-amount').value);
+  var cur = document.getElementById('exp-currency').value;
+  if (!name || isNaN(amt) || amt <= 0) { alert('請輸入項目名稱與金額'); return; }
+  expenses.push({ id: Date.now(), name: name, amount: amt, currency: cur });
+  document.getElementById('exp-name').value = '';
+  document.getElementById('exp-amount').value = '';
+  document.getElementById('exp-preview').textContent = '';
+  saveExpenses(); renderExpenses();
+}
+function deleteExpense(id) {
+  expenses = expenses.filter(function(e) { return e.id != id; });
+  saveExpenses(); renderExpenses();
+}
+function renderExpenses() {
+  var list = document.getElementById('exp-list');
+  var box = document.getElementById('exp-total-box');
+  if (!list) return;
+  if (expenses.length === 0) { list.innerHTML = ''; box.style.display = 'none'; return; }
+  box.style.display = '';
+  var rate = parseFloat(document.getElementById('rate-input').value) || 42;
+  var totalKRW = 0, totalTWDdirect = 0;
+  var html = '';
+  expenses.forEach(function(e) {
+    if (e.currency === 'KRW') totalKRW += e.amount;
+    else totalTWDdirect += e.amount;
+    var twdVal = (e.currency === 'KRW' ? e.amount / rate : e.amount).toFixed(1);
+    var tagBg = e.currency === 'KRW' ? 'var(--blue-pale)' : 'var(--pink-pale)';
+    var tagColor = e.currency === 'KRW' ? 'var(--blue)' : 'var(--pink)';
+    var symbol = e.currency === 'KRW' ? '₩' : '$';
+    html += '<div style="display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--pink-light);">';
+    html += '<div style="flex:1;font-size:13px;font-weight:500;color:var(--text);">' + e.name.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</div>';
+    html += '<span style="font-size:12px;font-weight:700;background:' + tagBg + ';color:' + tagColor + ';padding:3px 9px;border-radius:20px;white-space:nowrap;">' + symbol + e.amount.toLocaleString() + '</span>';
+    html += '<span style="font-size:11px;color:var(--text-muted);white-space:nowrap;">≈' + twdVal + 'TWD</span>';
+    html += '<button onclick="deleteExpense(' + e.id + ')" style="background:none;border:none;color:var(--pink-mid);font-size:16px;cursor:pointer;padding:0 2px;">×</button>';
+    html += '</div>';
+  });
+  list.innerHTML = html;
+  var totalTWD = totalTWDdirect + totalKRW / rate;
+  document.getElementById('exp-krw-sub').textContent = '₩' + Math.round(totalKRW).toLocaleString();
+  document.getElementById('exp-twd-sub').textContent = '$' + totalTWDdirect.toLocaleString();
+  document.getElementById('exp-total-twd').textContent = '$' + Math.round(totalTWD).toLocaleString();
+}
+
+// ══════ CLOSE MODALS ON BG CLICK ══════
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('open');
+  });
+});
+
+// ══════ INIT ══════
+if (itins.length === 0) {
+  itins = [
+    { id: 1748880000001, name: '✈️ 抵達釜山', date: '2026-06-03', time: '', addr: '金海國際機場 김해국제공항', transport: '🚌 公車', color: '#C97B93', note: '點擊編輯，填入入住飯店等資訊' },
+    { id: 1748880000002, name: '📌 待規劃', date: '2026-06-04', time: '', addr: '', transport: '', color: '#6FA3C1', note: '點擊編輯，新增景點' },
+    { id: 1748880000003, name: '📌 待規劃', date: '2026-06-05', time: '', addr: '', transport: '', color: '#9ABFAE', note: '點擊編輯，新增景點' },
+    { id: 1748880000004, name: '📌 待規劃', date: '2026-06-06', time: '', addr: '', transport: '', color: '#E8907E', note: '點擊編輯，新增景點' },
+    { id: 1748880000005, name: '✈️ 返回台灣', date: '2026-06-07', time: '', addr: '金海國際機場 김해국제공항', transport: '🚌 公車', color: '#B8A9D0', note: '點擊編輯，填入回程航班資訊' }
+  ];
+  saveData();
+}
+renderItins();
+renderShops();
+renderExpenses();
+document.getElementById('shop-progress-wrap').style.display = 'none';
+</script>
+</body>
+</html>
